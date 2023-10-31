@@ -1,0 +1,109 @@
+{
+  "name": "testvs",
+  "displayName": "testvs",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.83.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "dot",
+        "extensions": [
+          ".dot"
+        ]
+      }
+    ],
+    "commands": [
+      {
+        "command": "extension.openDotAsWebview",
+        "title": "Open .dot as Webview"
+      },
+      {
+        "command": "testvs.helloWorld",
+        "title": "Hello World"
+      }
+    ],
+    "views": {
+      "helloWorld": [
+        {
+          "id": "helloWorld",
+          "name": "Hello World"
+        }
+      ],
+      "explorer": [
+        {
+          "id": "extension.openDotAsWebview",
+          "name": "Open .dot as Webview",
+          "command": "extension.openDotAsWebview",
+          "when": "viewItem == file && viewItem.resourceExt == dot",
+          "group": "1_context",
+          "iconPath": {
+            "light": "media/dep.svg",
+            "dark": "media/dep.svg"
+          }
+        }
+      ]
+    },
+    "customEditors": [
+      {
+        "viewType": "dot.customEditor",
+        "displayName": "DOT Custom Editor",
+        "selector": [
+          {
+            "filenamePattern": "*.dot"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "helloWorld",
+          "title": "Hello World",
+          "icon": "media/dep.svg"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "yarn run compile-tests && yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.2",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.83.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "@vscode/test-electron": "^2.3.4",
+    "eslint": "^8.50.0",
+    "glob": "^10.3.3",
+    "mocha": "^10.2.0",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.2.2",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@types/react": "^18.2.33",
+    "@types/viz.js": "^2.1.2",
+    "@viz-js/viz": "^3.2.3",
+    "react": "^18.2.0",
+    "viz.js": "^2.1.2"
+  }
+}
