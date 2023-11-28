@@ -3,7 +3,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 const path = require('path');
-
+import MyForm from './component';
 import Viz from 'viz.js';
 import { Module, render } from 'viz.js/full.render.js';
 
@@ -49,6 +49,13 @@ class DotEditorProvider implements vscode.CustomTextEditorProvider {
                 ${svg}
                 <input />
                 <iframe src="http://localhost:3009/i2f/mobile-verification" width="100%" height="100%"></iframe>
+                <div id="root"></div>
+                <script>
+                    ReactDOM.render(
+                        React.createElement(MyForm),
+                        document.getElementById('root')
+                    );
+                </script>
             </body>
             </html>
         `;
